@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Florería | Arreglos Florales Hechos con Amor</title>
+  <meta name="description" content="Florería — Flores y arreglos artesanales en el istmo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       CART DRAWER
+  ══════════════════════════════ -->
+  <div class="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-aside">
+    <div class="cart-header">
+      <div class="cart-header-left">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <h2>Tu Compra</h2>
+        <span id="cart-count-badge" class="cart-badge hidden">0</span>
+      </div>
+      <button class="cart-close-btn" onclick="closeCart()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div id="cart-items" class="cart-items hide-scrollbar"></div>
+    <div id="cart-footer" class="cart-footer hidden">
+      <div class="cart-total">
+        <span class="cart-total-label">Total</span>
+        <span id="cart-total-amount" class="cart-total-amount">$0</span>
+      </div>
+      <a id="whatsapp-order-btn" href="#" target="_blank" rel="noreferrer" class="cart-whatsapp-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+        Pedir por WhatsApp
+      </a>
+      <button class="cart-clear-btn" onclick="clearCart()">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════
+       NAVBAR
+  ══════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      Florería Bella
+    </a>
+    <div class="nav-links">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#redes">Redes</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <button class="nav-cart-btn" onclick="openCart()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+      <span id="nav-cart-count" class="nav-cart-count hidden">0</span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════════════════
+       HERO
+  ══════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="hero-label-line"></span>
+        Ciudad de México
+      </div>
+      <h1 class="hero-title">
+        El arte<br>de regalar<br>
+        <em>flores.</em>
+      </h1>
+      <p class="hero-desc">
+        Arreglos artesanales que transforman el momento. Cada pieza, creada a mano con flores frescas del día.
+      </p>
+      <div class="hero-btns">
+        <a href="#catalogo" class="btn-dark">
+          Ver colección
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <button class="btn-outline" onclick="openCart()" id="hero-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          Mi carrito
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-n">2,000+</div>
+          <div class="hero-stat-l">Arreglos entregados</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">5 años</div>
+          <div class="hero-stat-l">De experiencia</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">100%</div>
+          <div class="hero-stat-l">Artesanal</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="/images/hero-bg.png" alt="Florería — flores frescas" />
+      <div class="hero-image-overlay"></div>
+      
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       MARQUEE
+  ══════════════════════════════ -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span class="marquee-item">Ramos Artesanales<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Arreglos de Temporada<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Entrega en CDMX<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Cajas de Flores<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Flores Frescas Diarias<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Pedidos por WhatsApp<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Hecho con Amor<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Ramos Artesanales<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Arreglos de Temporada<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Entrega en CDMX<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Cajas de Flores<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Flores Frescas Diarias<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Pedidos por WhatsApp<span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Hecho con Amor<span class="marquee-dot">·</span></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       CATALOG
+  ══════════════════════════════ -->
+  <section id="catalogo" class="catalog-section">
+    <div style="max-width:80rem;margin:0 auto;">
+      <div class="catalog-header">
+        <div>
+          <p class="section-label">— Colección —</p>
+          <h2 class="catalog-title">Flores frescas,<br><em>cada mañana.</em></h2>
+        </div>
+        <p class="catalog-subtitle">Seleccionamos lo mejor del mercado de flores cada día para crear arreglos únicos.</p>
+      </div>
+
+      <div class="cat-tabs hide-scrollbar">
+        <button class="cat-tab active" onclick="filterCat(this,'Todos')">Todos</button>
+        <button class="cat-tab" onclick="filterCat(this,'Ramos')">Ramos</button>
+        <button class="cat-tab" onclick="filterCat(this,'Arreglos')">Arreglos</button>
+        <button class="cat-tab" onclick="filterCat(this,'Cajas')">Cajas</button>
+        <button class="cat-tab" onclick="filterCat(this,'Flores')">Flores</button>
+      </div>
+
+      <div id="products-grid" class="products-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       FEATURE STRIP
+  ══════════════════════════════ -->
+  <div class="feature-strip">
+    <div class="feature-strip-inner">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect width="7" height="7" x="14" y="10" rx="1"/><path d="M5 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0"/><path d="M17 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0"/></svg>
+        </div>
+        <div>
+          <p class="feature-title">Entrega el mismo día</p>
+          <p class="feature-desc">Pedidos antes de las 2 PM en itsmo</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div>
+          <p class="feature-title">Flores del día</p>
+          <p class="feature-desc">Frescas del mercado cada mañana</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <p class="feature-title">Garantía de calidad</p>
+          <p class="feature-desc">100% satisfacción o repetimos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SOCIAL / JOURNAL
+  ══════════════════════════════ -->
+  <section id="redes" class="social-section">
+    <div style="max-width:80rem;margin:0 auto;" class="social-inner">
+      <div class="social-text">
+        <p class="social-label">— Síguenos —</p>
+        <h2 class="social-title">Journal<br><em>Botánico</em></h2>
+        <p class="social-desc">Cada día creamos algo nuevo. Inspírate con nuestras creaciones y únete a la comunidad floral.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            Seguir en Instagram
+          </a>
+          <a href="#" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Página en Facebook
+          </a>
+          <a href="https://wa.me/521234567890" target="_blank" rel="noreferrer" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+            Chatear por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="social-gallery">
+        <div class="social-col">
+          <div class="gallery-img tall"><img src="/images/product-peonies.png" alt="Peonías" /></div>
+          <div class="gallery-img square"><img src="/images/product-tropical.png" alt="Arreglo tropical" /></div>
+        </div>
+        <div class="social-col offset">
+          <div class="gallery-img square"><img src="/images/product-sunflowers.png" alt="Girasoles" /></div>
+          <div class="gallery-img tall"><img src="/images/product-roses.png" alt="Rosas" /></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       MAP / UBICACIÓN
+  ══════════════════════════════ -->
+  <section id="ubicacion" class="map-section">
+    <div style="max-width:80rem;margin:0 auto;">
+      <div class="map-section-header">
+        <p class="section-label">— Visítanos —</p>
+        <h2 class="map-section-title">Nuestro <em>estudio</em></h2>
+      </div>
+
+      <div class="map-grid">
+        <div class="map-info">
+          <div class="map-info-row accent-primary">
+            <div class="map-info-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Dirección
+            </div>
+            <p class="map-info-text">Av. de las Rosas 123</p>
+            <p class="map-info-sub">Col. Centro, CDMX, CP 06000</p>
+          </div>
+
+          <div class="map-info-row accent-gold">
+            <div class="map-info-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Horario
+            </div>
+            <p class="map-info-sub">Lun–Vie: 8:00 AM – 8:00 PM</p>
+            <p class="map-info-sub">Sáb–Dom: 9:00 AM – 6:00 PM</p>
+          </div>
+
+          <div class="map-info-row accent-green">
+            <div class="map-info-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Teléfono
+            </div>
+            <p class="map-info-sub">+52 1 234 567 890</p>
+            <a href="https://wa.me/521234567890" target="_blank" rel="noreferrer" class="map-wa-link">
+              WhatsApp
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+          </div>
+
+          <a href="https://www.google.com/maps/search/Floreria+Mexico+City" target="_blank" rel="noreferrer" class="map-gm-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Abrir en Google Maps
+          </a>
+        </div>
+
+        <div class="map-iframe-wrap">
+          <iframe
+            title="Ubicación Florería Bella"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-99.1432%2C19.4226%2C-99.1232%2C19.4426&layer=mapnik&marker=19.4326%2C-99.1332"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+          <div class="map-iframe-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <div>
+              <strong>Florería</strong>
+              <small>Abierto hoy</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       CONTACT
+  ══════════════════════════════ -->
+  <section id="contacto" class="contact-section">
+    <div class="contact-inner">
+      <div class="contact-image">
+        <img src="/images/product-roses.png" alt="Flores" />
+        <div class="contact-image-overlay"></div>
+        <div class="contact-image-text">
+          <small>Proyectos especiales</small>
+          <h2>Creamos<br><em>belleza</em><br>a tu medida.</h2>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <p class="contact-label-top">— Contáctanos —</p>
+        <h2 class="contact-title">Hablemos de flores</h2>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" placeholder="Tu nombre" />
+          </div>
+          <div class="form-group">
+            <label for="telefono">WhatsApp</label>
+            <input type="tel" id="telefono" placeholder="+52 ..." />
+          </div>
+          <div class="form-group">
+            <label for="servicio">Tipo de servicio</label>
+            <select id="servicio">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="ramo">Ramo Personalizado</option>
+              <option value="evento">Evento / Boda</option>
+              <option value="suscripcion">Suscripción Floral</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" rows="3" placeholder="Cuéntanos tu idea..."></textarea>
+          </div>
+          <button type="button" class="contact-submit">
+            Enviar mensaje
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            Florería Bella
+          </div>
+          <p class="footer-brand-desc">Arte floral artesanal en el corazón de la Ciudad de México. Cada arreglo, una historia.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://wa.me/521234567890" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Explorar</h4>
+          <ul>
+            <li><a href="#catalogo">Colección</a></li>
+            <li><a href="#redes">Journal</a></li>
+            <li><a href="#ubicacion">Estudio</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Contacto</h4>
+          <ul>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Av. de las Rosas 123, CDMX
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +52 1 234 567 890
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Lun–Dom: 8 AM – 8 PM
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <script>document.write(new Date().getFullYear())</script> Florería Bella. Todos los derechos reservados.</span>
+        <span>Hecho con pasión en México.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
