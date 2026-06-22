@@ -32,20 +32,20 @@ const ICONS = {
 
 /* ── Products ── */
 const PRODUCTS = [
-  { id:1,  name:"Ramo de Rosas Rojas",    price:450, desc:"24 rosas rojas seleccionadas a mano, envueltas en papel kraft premium.",              img:"/images/product-roses.png",      cat:"Ramos",    tag:"Popular"   },
-  { id:2,  name:"Bouquet Primaveral",      price:520, desc:"Explosión de colores vibrantes con flores de temporada y follaje fresco.",             img:"/images/hero-bg.png",            cat:"Ramos"                      },
-  { id:3,  name:"Ramo de Peonías",         price:720, desc:"Elegancia pura. Peonías rosadas y blancas con un aroma embriagador.",                 img:"/images/product-peonies.png",    cat:"Ramos",    tag:"Exclusivo" },
-  { id:4,  name:"Ramo de Tulipanes",       price:420, desc:"Tulipanes holandeses en tonos pastel, perfectos para cualquier ocasión.",             img:"/images/product-sunflowers.png", cat:"Ramos"                      },
-  { id:5,  name:"Mini Bouquet",            price:220, desc:"Pequeño pero encantador. Flores mixtas ideales para un detalle espontáneo.",           img:"/images/product-roses.png",      cat:"Ramos"                      },
-  { id:6,  name:"Arreglo de Girasoles",    price:380, desc:"Luz y alegría en un jarrón rústico. Girasoles frescos que iluminan cualquier espacio.",img:"/images/product-sunflowers.png", cat:"Arreglos"                  },
-  { id:7,  name:"Arreglo Tropical",        price:600, desc:"Exótico y llamativo. Aves del paraíso, monsteras y flores tropicales.",               img:"/images/product-tropical.png",   cat:"Arreglos", tag:"Nuevo"     },
-  { id:8,  name:"Arreglo de Orquídeas",    price:950, desc:"Belleza duradera y exótica. Perfectas para un regalo elegante de larga vida.",        img:"/images/product-peonies.png",    cat:"Arreglos", tag:"Premium"   },
-  { id:9,  name:"Centro de Mesa",          price:750, desc:"El toque perfecto para reuniones. Flores mixtas en un arreglo horizontal estilizado.", img:"/images/product-sunflowers.png", cat:"Arreglos"                  },
-  { id:10, name:"Rosas en Caja Terciopelo",price:890, desc:"Lujo y sofisticación. Rosas premium en una elegante caja de terciopelo.",             img:"/images/product-box.png",        cat:"Cajas",    tag:"Popular"   },
-  { id:11, name:"Caja Corazón Mixta",      price:680, desc:"Mezcla romántica de flores frescas en una caja con forma de corazón.",                img:"/images/product-roses.png",      cat:"Cajas"                      },
-  { id:12, name:"Flor de Noche Buena",     price:280, desc:"Símbolo mexicano de celebración. Perfecta para festejos y decoración del hogar.",     img:"/images/product-sunflowers.png", cat:"Flores"                    },
-  { id:13, name:"Orquídea en Maceta",      price:320, desc:"Planta viva de orquídea en maceta decorativa. Un regalo que dura meses.",             img:"/images/product-peonies.png",    cat:"Flores"                    },
-  { id:14, name:"Girasoles Sueltos x5",    price:150, desc:"Cinco girasoles frescos para que tú elijas cómo disfrutarlos.",                       img:"/images/product-sunflowers.png", cat:"Flores"                    },
+  { id:1,  name:"Ramo de Rosas Rojas",    price:450, desc:"24 rosas rojas seleccionadas a mano, envueltas en papel kraft premium.",              img:"images/rosa.jpg",      cat:"Ramos",    tag:"Popular"   },
+  { id:2,  name:"Bouquet Primaveral",      price:520, desc:"Explosión de colores vibrantes con flores de temporada y follaje fresco.",             img:"images/hero.jpg",            cat:"Ramos"                      },
+  { id:3,  name:"Ramo de Peonías",         price:720, desc:"Elegancia pura. Peonías rosadas y blancas con un aroma embriagador.",                 img:"images/peonies.jpg",    cat:"Ramos",    tag:"Exclusivo" },
+  { id:4,  name:"Ramo de Tulipanes",       price:420, desc:"Tulipanes holandeses en tonos pastel, perfectos para cualquier ocasión.",             img:"images/sunflowers.jpg", cat:"Ramos"                      },
+  { id:5,  name:"Mini Bouquet",            price:220, desc:"Pequeño pero encantador. Flores mixtas ideales para un detalle espontáneo.",           img:"images/rosa.jpg",      cat:"Ramos"                      },
+  { id:6,  name:"Arreglo de Girasoles",    price:380, desc:"Luz y alegría en un jarrón rústico. Girasoles frescos que iluminan cualquier espacio.",img:"images/sunflowers.jpg", cat:"Arreglos"                  },
+  { id:7,  name:"Arreglo Tropical",        price:600, desc:"Exótico y llamativo. Aves del paraíso, monsteras y flores tropicales.",               img:"images/tropical.jpg",   cat:"Arreglos", tag:"Nuevo"     },
+  { id:8,  name:"Arreglo de Orquídeas",    price:950, desc:"Belleza duradera y exótica. Perfectas para un regalo elegante de larga vida.",        img:"images/peonies.jpg",    cat:"Arreglos", tag:"Premium"   },
+  { id:9,  name:"Centro de Mesa",          price:750, desc:"El toque perfecto para reuniones. Flores mixtas en un arreglo horizontal estilizado.", img:"images/sunflowers.jpg", cat:"Arreglos"                  },
+  { id:10, name:"Rosas en Caja Terciopelo",price:890, desc:"Lujo y sofisticación. Rosas premium en una elegante caja de terciopelo.",             img:"images/box.jpg",        cat:"Cajas",    tag:"Popular"   },
+  { id:11, name:"Caja Corazón Mixta",      price:680, desc:"Mezcla romántica de flores frescas en una caja con forma de corazón.",                img:"images/rosa.jpg",      cat:"Cajas"                      },
+  { id:12, name:"Flor de Noche Buena",     price:280, desc:"Símbolo mexicano de celebración. Perfecta para festejos y decoración del hogar.",     img:"images/sunflowers.jpg", cat:"Flores"                    },
+  { id:13, name:"Orquídea en Maceta",      price:320, desc:"Planta viva de orquídea en maceta decorativa. Un regalo que dura meses.",             img:"images/peonies.jpg",    cat:"Flores"                    },
+  { id:14, name:"Girasoles Sueltos x5",    price:150, desc:"Cinco girasoles frescos para que tú elijas cómo disfrutarlos.",                       img:"images/sunflowers.jpg", cat:"Flores"                    },
 ];
 
 /* ── State ── */
