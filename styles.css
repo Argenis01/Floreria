@@ -509,9 +509,27 @@ body.cart-open .cart-aside   { transform: translateX(0); }
   .footer-brand { grid-column: 1 / -1; }
 }
 @media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-image { display: none; }
-  .hero-content { padding: 7rem 1.5rem 3rem; }
+  .hero { 
+    grid-template-columns: 1fr; 
+    position: relative;
+    background-image: linear-gradient(
+      rgba(255,255,255,.75),
+      rgba(255,255,255,.75)
+    ), url("images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-image { 
+    display: none; 
+  }
+
+  .hero-content { 
+    padding: 7rem 1.5rem 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
   #navbar { padding: 1rem 1.5rem; }
   #navbar.scrolled { padding: .75rem 1.5rem; }
   .nav-links { display: none; }
