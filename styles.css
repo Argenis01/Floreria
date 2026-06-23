@@ -674,3 +674,37 @@ body.cart-open .cart-aside   { transform: translateX(0); }
   border-radius: 8px;
   cursor: pointer;
 }
+/* ── OPTIMIZACIÓN RESPONSIVA PARA CELULARES (MÓVIL) ── */
+@media (max-width: 480px) {
+  /* Hacemos que la ventana se adapte proporcionalmente a la pantalla del celular */
+  #chat-bot-container {
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    width: auto; /* Quita el ancho fijo de 340px */
+    height: 400px; /* Reducimos la altura para que no tape todo el sitio */
+    box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+  }
+
+  /* Corregimos las sugerencias para que tengan scroll horizontal si no caben, en lugar de amontonarse */
+  .chat-bot-suggested {
+    display: flex;
+    flex-wrap: nowrap; /* Evita que se vayan hacia abajo rústicamente */
+    overflow-x: auto; /* Permite deslizar los botones con el dedo de izquierda a derecha */
+    padding: 8px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Nos aseguramos de que cada botón mantenga su forma de burbuja premium */
+  .chat-bot-suggested button {
+    flex: 0 0 auto; /* Evita que el texto del botón se encoja o se deforme */
+    white-space: nowrap; /* Mantiene el texto en una sola línea */
+    padding: 6px 12px;
+  }
+
+  /* Espacio extra abajo en el área de mensajes para que sea cómodo de leer */
+  .chat-bot-messages {
+    padding: 12px;
+  }
+}
