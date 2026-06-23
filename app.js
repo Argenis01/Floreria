@@ -2,7 +2,7 @@
    FLORERÍA BELLA — Vanilla JS
 ══════════════════════════════════════ */
 
-const WA = "https://wa.me/521234567890";
+const WA = "https://wa.me/529611843591";
 
 /* ── SVG Icons ── */
 const ICONS = {
@@ -115,17 +115,28 @@ function renderCartItems() {
 function addToCart(id) {
   const product = PRODUCTS.find(p => p.id === id);
   if (!product) return;
+  
   const exists = cart.find(i => i.id === id);
-  if (exists) cart = cart.map(i => i.id === id ? { ...i, qty: i.qty + 1 } : i);
-  else cart = [...cart, { ...product, qty: 1 }];
+  if (exists) {
+    cart = cart.map(i => i.id === id ? { ...i, qty: i.qty + 1 } : i);
+  } else {
+    cart = [...cart, { ...product, qty: 1 }];
+  }
+  
   renderCartItems();
-  renderProducts();
-  // Flash "Agregado" on card button
+  
+  // CORRECCIÓN: Buscamos el botón ANTES de redibujar la lista completa de productos
   const btn = document.querySelector(`[data-add-id="${id}"]`);
   if (btn) {
     btn.classList.add("just-added");
     btn.innerHTML = "&#10003; Agregado";
-    setTimeout(() => { renderProducts(); }, 1400);
+    
+    // Esperamos un momento con la animación antes de transformar el botón en controles de cantidad
+    setTimeout(() => { 
+      renderProducts(); 
+    }, 1000);
+  } else {
+    renderProducts();
   }
 }
 
@@ -197,8 +208,36 @@ window.addEventListener("scroll", () => {
   if (nav) nav.classList.toggle("scrolled", window.scrollY > 60);
 }, { passive: true });
 
-/* ── Init ── */
+/* ── Init Definitivo por Click ── */
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
   renderCartItems();
+
+  // Escuchamos directamente el click del botón de enviar mensaje
+  const botonEnviar = document.getElementById("btnEnviarForm");
+  if (botonEnviar) {
+    botonEnviar.addEventListener("click", () => {
+      const nombre = document.getElementById("nombre").value.trim();
+      const telefonoCliente = document.getElementById("telefono").value.trim();
+      const servicioSelect = document.getElementById("servicio");
+      const servicioTexto = servicioSelect.options[servicioSelect.selectedIndex].text;
+      const mensaje = document.getElementById("mensaje").value.trim();
+      
+      // Validación manual rápida por si acaso
+      if (!nombre || !telefonoCliente || !mensaje) {
+        alert("Por favor, rellena todos los campos antes de enviar.");
+        return;
+      }
+      
+      const textoWhatsApp = `¡Hola, Florería Asunción! Me gustaría solicitar información:\n\n` +
+                            `• *Nombre:* ${nombre}\n` +
+                            `• *WhatsApp:* ${telefonoCliente}\n` +
+                            `• *Servicio:* ${servicioTexto}\n` +
+                            `• *Mensaje:* ${mensaje}`;
+      
+      const urlFinal = `${WA}?text=${encodeURIComponent(textoWhatsApp)}`;
+      
+      window.open(urlFinal, "_blank");
+    });
+  }
 });
