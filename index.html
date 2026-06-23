@@ -366,6 +366,153 @@
     
     window.open(urlFinal, "_blank");
   }
+
+
+  // ── LÓGICA DEL BOTÓN FLOTANTE Y RESPUESTAS PRETERMINADAS ──
+
+// Abre y cierra la ventana del bot
+function toggleChatBot() {
+  const container = document.getElementById("chat-bot-container");
+  container.classList.toggle("chat-bot-hidden");
+}
+
+// Envía la pregunta si el usuario presiona Enter en el teclado
+function evaluarEnterBot(e) {
+  if (e.key === 'Enter') enviarMensajeUsuario();
+}
+
+// Procesa lo que el usuario escribe manualmente
+function enviarMensajeUsuario() {
+  const input = document.getElementById("chatBotInput");
+  const texto = input.value.trim();
+  if (!texto) return;
+
+  renderizarMensaje(texto, 'user');
+  input.value = ""; // Limpia el input
+
+  // Simula que el bot está "pensando" y responde en medio segundo
+  setTimeout(() => {
+    responderBot(texto);
+  }, 500);
+}
+
+// Procesa si el usuario hace clic en un botón de sugerencia rápida
+function enviarSugerencia(textoPredefinido) {
+  renderizarMensaje(textoPredefinido, 'user');
+  setTimeout(() => {
+    responderBot(textoPredefinido);
+  }, 500);
+}
+
+// Imprime los globos de texto en la pantalla
+function renderizarMensaje(texto, remitente) {
+  const contenedor = document.getElementById("chatBotMessages");
+  const div = document.createElement("div");
+  div.className = remitente === 'user' ? 'user-msg' : 'bot-msg';
+  div.innerText = texto;
+  contenedor.appendChild(div);
+  
+  // Auto-scroll hacia abajo para ver el último mensaje
+  contenedor.scrollTop = contenedor.scrollHeight;
+}
+
+// ── BANCO DE RESPUESTAS ULTRA AMPLIADO PARA FLORERÍA ASUNCIÓN ──
+function responderBot(preguntaCliente) {
+  const saludo = preguntaCliente.toLowerCase();
+  let respuesta = "Disculpa, no entendí bien tu consulta. 💬 Puedes dar clic al botón 'Enviar mensaje' en nuestra sección de contacto para hablar directamente con nosotros por WhatsApp.";
+
+  // 1. Horarios
+  if (saludo.includes("horario") || saludo.includes("hora") || saludo.includes("abren") || saludo.includes("cierran")) {
+    respuesta = "⏰ Nuestro horario de atención es de Lunes a Sábado de 9:00 AM a 8:00 PM. Domingos de 10:00 AM a 4:00 PM.";
+  } 
+  // 2. Envíos a domicilio
+  else if (saludo.includes("domicilio") || saludo.includes("envio") || saludo.includes("envió") || saludo.includes("reparto") || saludo.includes("dirección")) {
+    respuesta = "🚗 ¡Sí contamos con servicio a domicilio en toda la ciudad! El costo de envío se calcula según tu ubicación exacta. Si nos dejas tu colonia en el formulario de contacto, te cotizamos de inmediato.";
+  } 
+  // 3. Tiempos de entrega / Pedidos personalizados
+  else if (saludo.includes("pedido") || saludo.includes("personalizado") || saludo.includes("tarda") || saludo.includes("anticipacion")) {
+    respuesta = "💐 Los arreglos estándar de nuestro catálogo se arman en unos 30-45 minutos. Para diseños especiales o eventos grandes, te sugerimos agendarlo con un mínimo de 24 horas de anticipación.";
+  } 
+  // 4. Métodos de Pago
+  else if (saludo.includes("pago") || saludo.includes("pagar") || saludo.includes("tarjeta") || saludo.includes("transferencia") || saludo.includes("efectivo") || saludo.includes("oxxo")) {
+    respuesta = "💵 Aceptamos pagos en efectivo en tienda, transferencias bancarias (SPEI), depósitos en tiendas OXXO y pagos con tarjeta de crédito/débito.";
+  }
+  // 5. Ubicación física
+  else if (saludo.includes("donde") || saludo.includes("ubicacion") || saludo.includes("local") || saludo.includes("tienda") || saludo.includes("donde estan") || saludo.includes("direccion")) {
+    respuesta = "📍 ¡Nos encantaría recibirte! Puedes ver nuestra ubicación exacta e indicaciones en el mapa interactivo que está un poco más arriba en esta página web.";
+  }
+  // 6. Cuidados de las flores
+  else if (saludo.includes("cuidar") || saludo.includes("duren") || saludo.includes("agua") || saludo.includes("cuidado") || saludo.includes("mantener")) {
+    respuesta = "💦 Tip Asunción: Para que tus flores duren más tiempo, cámbiales el agua fresca cada dos días, corta los tallos en diagonal (1 cm) y mantenlas lejos del sol directo o corrientes de aire.";
+  }
+  // 7. Facturación
+  else if (saludo.includes("factura") || saludo.includes("facturan") || saludo.includes("fiscal") || saludo.includes("sat")) {
+    respuesta = "📄 Sí emitimos factura fiscal. Una vez que realices tu compra, solo compártenos tus datos fiscales (RFC, Uso de CFDI y Constancia) a nuestro WhatsApp para generarla.";
+  }
+  // 8. Cancelaciones o Cambios
+  else if (saludo.includes("cancelar") || saludo.includes("cambio") || saludo.includes("devolucion") || saludo.includes("reprogramar")) {
+    respuesta = "🔄 Para cambios de fecha, dirección o cancelaciones, por favor avísanos con al menos 12 horas de anticipación a nuestro WhatsApp para poder ajustar tu pedido sin penalizaciones.";
+  }
+  // 9. Precios generales
+  else if (saludo.includes("precio") || saludo.includes("costo") || saludo.includes("cuanto vale") || saludo.includes("barato")) {
+    respuesta = "💵 Tenemos detalles individuales y ramos desde $150 MXN hasta arreglos premium de catálogo o cajas de terciopelo. Puedes explorar los precios exactos navegando en nuestra sección de Catálogo.";
+  }
+  // 10. ¿Qué pasa si no hay nadie en el domicilio?
+  else if (saludo.includes("no esta") || saludo.includes("no haya nadie") || saludo.includes("recibe") || saludo.includes("ausente")) {
+    respuesta = "🚗 Si al llegar no se encuentra el destinatario, nuestro repartidor intentará comunicarse contigo. Podemos dejar el arreglo con un vecino de confianza o en recepción si nos lo autorizas.";
+  }
+  // 11. Envíos Anónimos / Sorpresas
+  else if (saludo.includes("anonimo") || saludo.includes("sepa quien") || saludo.includes("sorpresa") || saludo.includes("secreto")) {
+    respuesta = "🤫 ¡Claro que sí! Mantenemos total confidencialidad si deseas enviar un arreglo de forma anónima. No revelaremos tu nombre a menos que tú decidas incluirlo en la tarjeta dedicada.";
+  }
+  // 12. Agregar notas / dedicatorias personalizados
+  else if (saludo.includes("tarjeta") || saludo.includes("dedicatoria") || saludo.includes("mensaje") || saludo.includes("nota")) {
+    respuesta = "✍️ Todos nuestros arreglos y ramos incluyen una tarjeta de cortesía con el mensaje personalizado que tú elijas. Al confirmar tu pedido por WhatsApp, nos indicas qué texto deseas que escribamos.";
+  }
+  // 13. Globos, Chocolates y Adicionales
+  else if (saludo.includes("chocolate") || saludo.includes("globo") || saludo.includes("peluche") || saludo.includes("adicional") || saludo.includes("regalo")) {
+    respuesta = "🎈 ¡Complementa tu detalle! Contamos con globos de helio, cajas de chocolates finos y osos de peluche que puedes añadir a cualquiera de tus arreglos de flores.";
+  }
+  // 14. Arreglos para Eventos (Bodas, XV Años)
+  else if (saludo.includes("boda") || saludo.includes("evento") || saludo.includes("xv") || saludo.includes("fiesta") || saludo.includes("decoracion")) {
+    respuesta = "⛪ ¡Hacemos de tu evento algo inolvidable! Decoramos bodas, aniversarios, XV años y reuniones corporativas. Escríbenos detallando tu idea en el formulario de contacto para agendar una cotización.";
+  }
+  // 15. Ramos de Novia / Ramos especiales
+  else if (saludo.includes("novia") || saludo.includes("ramo de novia") || saludo.includes("matrimonio")) {
+    respuesta = "👰 Diseñamos ramos de novia espectaculares y personalizados, adaptados a tu estilo y paleta de colores. Te sugerimos cotizarlos con un mínimo de 15 días de anticipación.";
+  }
+  // 16. Arreglos Fúnebres / Condolencias
+  else if (saludo.includes("funebre") || saludo.includes("funeral") || saludo.includes("corona") || saludo.includes("pesame") || saludo.includes("condolencia")) {
+    respuesta = "🕊️ Contamos con arreglos de condolencias, coronas fúnebres y cruces florales para acompañarte en esos momentos difíciles. Priorizamos estos pedidos para entregas urgentes.";
+  }
+  // 17. Flores favoritas disponibles (Rosas, Girasoles, etc.)
+  else if (saludo.includes("que flores") || saludo.includes("girasol") || saludo.includes("rosa") || saludo.includes("tulipan") || saludo.includes("peonia") || saludo.includes("orquidea")) {
+    respuesta = "🌹 Manejos una amplia variedad de flores frescas de temporada: Rosas premium, Girasoles radiantes, Tulipanes holandeses, Orquídeas elegantes y Peonías exclusivas. Consulta la disponibilidad del día por WhatsApp.";
+  }
+  // 18. Descuentos / Promociones
+  else if (saludo.includes("descuento") || saludo.includes("promocion") || saludo.includes("rebaja") || saludo.includes("cupon")) {
+    respuesta = "✨ Te invitamos a seguir nuestras redes sociales (Facebook e Instagram) en los enlaces de la barra superior. Ahí publicamos nuestras promociones del mes y dinámicas especiales.";
+  }
+  // 19. ¿Garantía de frescura?
+  else if (saludo.includes("frescas") || saludo.includes("calidad") || saludo.includes("garantia") || saludo.includes("marchitas")) {
+    respuesta = "🏅 En Florería Asunción seleccionamos nuestras flores a mano todas las mañanas directamente de los mejores productores. Te garantizamos arreglos vibrantes, limpios y de máxima duración.";
+  }
+  // 20. Saludos iniciales estándar
+  else if (saludo.includes("hola") || saludo.includes("buenos dias") || saludo.includes("buenas tardes") || saludo.includes("buenas noches") || saludo.includes("que tal")) {
+    respuesta = "¡Hola! ✨ Bienvenido a Florería Asunción. ¿Te interesa saber sobre nuestros horarios, zonas de envío, métodos de pago, agregar chocolates o cómo personalizar tu tarjeta?";
+  }
+
+  // 11. Envíos Anónimos / Sorpresas
+  else if (saludo.includes("anonimo") || saludo.includes("sepa quien") || saludo.includes("sorpresa") || saludo.includes("secreto") || saludo.includes("sorpresas / anónimos") || saludo.includes("Anonimo / Anonimos") || saludo.includes("Sorpresas / Anónimos")  || saludo.includes("anónimos")) {
+    respuesta = "🤫 ¡Claro que sí! Mantenemos total confidencialidad si deseas enviar un arreglo de forma anónima. No revelaremos tu nombre al destinatario a menos que tú decidas escribirlo en la dedicatoria.";
+  }
+
+  // 6. Cuidados de las flores
+  else if (saludo.includes("cuidar") || saludo.includes("duren") || saludo.includes("agua") || saludo.includes("cuidado") || saludo.includes("mantener") || saludo.includes("cuido mis flores") || saludo.includes("tips de cuidado")) {
+    respuesta = "💦 Tip Asunción: Para que tus flores duren más tiempo, cámbiales el agua fresca cada dos días, corta los tallos en diagonal (1 cm) y mantenlas lejos del sol directo o corrientes de aire.";
+  }
+  renderizarMensaje(respuesta, 'bot');
+}
 </script>
       </div>
     </div>
@@ -431,6 +578,45 @@
       </div>
     </div>
   </footer>
+
+<div id="chat-bot-launcher" onclick="toggleChatBot()">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+  <span>¿Dudas?</span>
+</div>
+
+<div id="chat-bot-container" class="chat-bot-hidden">
+  <div class="chat-bot-header">
+    <div class="chat-bot-title">
+      <div class="chat-bot-status"></div>
+      <div>
+        <h4>Asistente Asunción</h4>
+        <p>En línea • Respuestas automáticas</p>
+      </div>
+    </div>
+    <button class="chat-bot-close" onclick="toggleChatBot()">&times;</button>
+  </div>
+
+  <div class="chat-bot-messages" id="chatBotMessages">
+    <div class="bot-msg">¡Hola! 🌸 Bienvenido a Florería Asunción. ¿En qué puedo ayudarte hoy? Puedes seleccionar una opción abajo o escribirme.</div>
+  </div>
+
+  <div class="chat-bot-suggested" id="chatBotSuggested">
+  <button onclick="enviarSugerencia('¿Qué horarios manejan?')">Horarios ⏰</button>
+  <button onclick="enviarSugerencia('¿Tienen servicio a domicilio?')">Envíos 🚗</button>
+  <button onclick="enviarSugerencia('¿Cómo puedo pagar?')">Métodos de Pago 💵</button>
+  <button onclick="enviarSugerencia('¿Cómo cuido mis flores?')">Tips de Cuidado 💦</button>
+  <button onclick="enviarSugerencia('¿Tienen envíos anónimos?')">Sorpresas / Anónimo 🤫</button>
+  <button onclick="enviarSugerencia('¿Puedo agregar chocolates o globos?')">Chocolates y Globos 🎈</button>
+
+</div>
+
+  <div class="chat-bot-input-area">
+    <input type="text" id="chatBotInput" placeholder="Escribe tu duda aquí..." onkeypress="evaluarEnterBot(event)">
+    <button onclick="enviarMensajeUsuario()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+    </button>
+  </div>
+</div>
 
   <script src="app.js"></script>
 </body>
